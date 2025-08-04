@@ -12,7 +12,7 @@ from sklearn.metrics import mean_squared_error, accuracy_score
 # === CONFIG ===
 API_KEY = "a961a5dad0162cdf5fab3830ea1737bf"  # Replace with your real API key if needed
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
-HISTORICAL_DATA_PATH = "weather(1).csv"  # Ensure this CSV is in the same directory
+HISTORICAL_DATA_PATH = "weather.csv"  # Ensure this CSV is in the same directory
 
 # === Streamlit UI ===
 st.title("🌦️ Weather Forecast & Rain Prediction")
@@ -152,3 +152,4 @@ if city:
             st.dataframe(pd.DataFrame({'Time': times, 'Humidity': future_hum.round(2)}))
     else:
         st.error("Could not retrieve weather data. Please check the city name.")
+
