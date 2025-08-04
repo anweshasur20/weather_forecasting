@@ -10,9 +10,9 @@ from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.metrics import mean_squared_error, accuracy_score
 
 # === CONFIG ===
-API_KEY = "a961a5dad0162cdf5fab3830ea1737bf"  # your real key
+API_KEY = "a961a5dad0162cdf5fab3830ea1737bf"  # Replace with your real API key if needed
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
-HISTORICAL_DATA_PATH = "weather(1).csv"  # put your file in same folder or adjust path
+HISTORICAL_DATA_PATH = "weather(1).csv"  # Ensure this CSV is in the same directory
 
 # === Streamlit UI ===
 st.title("🌦️ Weather Forecast & Rain Prediction")
@@ -98,7 +98,7 @@ if city:
         st.write(f"🔻 Min: {current['temp_min']}°C | 🔺 Max: {current['temp_max']}°C")
         st.write(f"💧 Humidity: {current['humidity']}% | 🧭 Wind Direction: {deg_to_compass(current['wind_gust_dir'])}")
         st.write(f"📋 Description: {current['description']}")
-        
+
         with st.spinner("🔄 Processing predictions..."):
             df = read_historical_data(HISTORICAL_DATA_PATH)
             x_rain, y_rain, le_rain = prepare_data(df)
@@ -108,7 +108,7 @@ if city:
             try:
                 wind_encoded = le_rain.transform([wind_label])[0]
             except:
-                wind_encoded = 0  # fallback
+                wind_encoded = 0
 
             current_df = pd.DataFrame([{
                 'Mintemp': current['temp_min'],
@@ -150,7 +150,5 @@ if city:
 
             st.write("Humidity (%):")
             st.dataframe(pd.DataFrame({'Time': times, 'Humidity': future_hum.round(2)}))
-
     else:
         st.error("Could not retrieve weather data. Please check the city name.")
-
